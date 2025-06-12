@@ -2,329 +2,393 @@
 body {
   margin: 0;
   font-family: 'Press Start 2P', monospace;
-  background: linear-gradient(135deg, #0ff, #f0f, #0ff, #00f, #f0f);
-  background-size: 400% 400%;
-  animation: bgGradient 20s ease infinite;
-  color: white;
   overflow-x: hidden;
+  color: #fff;
+  background-color: black;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,0,255,0.15) 0px,
+      rgba(255,0,255,0.15) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,255,255,0.1) 0px,
+      rgba(0,255,255,0.1) 3px,
+      transparent 3px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  animation: moveGlitch 20s linear infinite;
+}
+
+@keyframes moveGlitch {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 0 1000px, 0 800px, 0 600px; }
+}
+
+.overlay {
+  position: relative;
+  z-index: 10;
 }
 
 .hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  background: rgba(0, 0, 0, 0.85);
+  padding: 6rem 1rem 4rem;
 }
 
-.logo {
-  font-size: 3rem;
-  color: #0ff;
-  text-shadow: 2px 2px #f0f;
-  animation: flicker 1.5s infinite;
+.title {
+  font-size: 2rem;
+  color: white;
+  animation: glitchText 1.5s infinite;
 }
 
-.slogan {
+.subtitle {
   font-size: 1rem;
-  margin: 1rem 0;
-  color: #f0f;
-  animation: flicker 2s infinite;
+  color: #ff00ff;
+  margin-top: 1rem;
 }
 
-.start-btn {
-  background: #0ff;
-  color: black;
-  text-decoration: none;
-  padding: 1rem 2rem;
-  margin-top: 1.5rem;
-  border: 2px solid #fff;
-  display: inline-block;
-  animation: shake 0.5s infinite alternate;
-}
-
-.lore, .stats, .community {
-  padding: 3rem 1rem;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-top: 2px dashed #555;
-}
-
-.dialogue-box {
-  background: #000;
-  border: 2px solid #0ff;
-  padding: 1.5rem;
-  margin: auto;
-  max-width: 700px;
-  font-size: 0.75rem;
-  line-height: 1.6;
-  color: #0ff;
-}
-
-.stats ul {
-  list-style: none;
-  padding: 0;
+.buttons {
   margin-top: 2rem;
 }
 
-.stats li {
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
-  animation: flicker 3s infinite;
+.glitch-btn {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: #00ffff;
+  color: #000;
+  text-decoration: none;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 6px #ff00ff;
+  animation: shake 1s infinite alternate;
 }
 
-.community img {
-  width: 60px;
-  margin-top: 1rem;
-  filter: drop-shadow(0 0 5px #0ff);
-  transition: transform 0.2s ease;
+@keyframes shake {
+  from { transform: translateX(0); }
+  to { transform: translateX(2px); }
 }
 
-.community img:hover {
-  transform: scale(1.1);
+@keyframes glitchText {
+  0%, 100% { text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff; }
+  50% { text-shadow: -2px 2px #00ffff, 2px -2px #ff00ff; }
 }
 
-footer {
-  background: rgba(0, 0, 0, 0.85);
+.terminal, .lore, .graveyard, .footer {
+  padding: 3rem 2rem;
+  background: rgba(0,0,0,0.75);
   text-align: center;
-  padding: 1rem;
-  border-top: 1px solid #333;
-  font-size: 0.7rem;
-  color: #ccc;
+  margin-top: 2rem;
+  border-top: 2px dashed #ff00ff;
 }
 
-/* Animations */
-@keyframes flicker {
+.terminal-box {
+  background: #000;
+  color: #0f0;
+  font-family: monospace;
+  padding: 1rem;
+  text-align: left;
+  margin: auto;
+  max-width: 600px;
+  border: 1px solid #0ff;
+}
+
+.typewriter {
+  font-size: 0.8rem;
+  animation: typing-multi 4s steps(80, end), blink 0.75s step-end infinite;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-width: 90%;
+  margin: 0 auto;
+  border-right: 2px solid #fff;
+}
+
+@keyframes typing-multi {
+  from { max-height: 0; }
+  to { max-height: 300px; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: white; }
+}
+
+.graveyard ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem auto;
+  font-size: 0.7rem;
+  color: #f0f;
+}
+
+.footer {
+  font-size: 0.6rem;
+  color: #666;
+}
+
+.glitch-line {
+  margin-top: 2rem;
+  font-size: 0.6rem;
+  color: #00ffff;
+  text-shadow: 1px 1px #ff00ff;
+  animation: glitchLineFlicker 1.5s infinite;
+}
+
+@keyframes glitchLineFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; transform: translateX(1px); }
+}
+
+/* Increase hero text sizes */
+.title {
+  font-size: 2.8rem;
+  color: white;
+  animation: glitchText 1.5s infinite;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.glitch-line {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #00ffff;
+  text-shadow: 1px 1px #ff00ff;
+  animation: glitchLineFlicker 1.5s infinite;
+}
+
+/* Section entrance animations */
+@keyframes fadeInUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+section {
+  animation: fadeInUp 1.2s ease-out both;
+}
+
+.tokenomics-roadmap {
+  padding: 3rem 2rem;
+  background: rgba(10, 0, 20, 0.75);
+  color: #ff00ff;
+  text-align: center;
+  border-top: 2px dashed #00ffff;
+  animation: fadeInUp 1.5s ease-in-out both;
+}
+
+.tokenomics-roadmap h2 {
+  font-size: 1.4rem;
+  text-shadow: 1px 1px #00ffff;
+  margin-bottom: 1.5rem;
+}
+
+.chaos-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.left-glitch, .right-glitch {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 10px #ff00ff;
+  animation: fadeInUp 2s ease-in-out both;
+}
+
+.left-glitch h3, .right-glitch h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.left-glitch ul, .right-glitch ul {
+  list-style: none;
+  padding: 0;
+  font-size: 0.75rem;
+  line-height: 1.4rem;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .chaos-columns {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+/* Continuous Animation Effects Per Section */
+
+.origin-section {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.terminal-section {
+  animation: flickerScan 2s infinite;
+}
+
+.graveyard-section {
+  animation: driftDrip 6s ease-in-out infinite;
+}
+
+.tokenomics-roadmap {
+  animation: corruptNoise 4s ease-in-out infinite;
+}
+
+/* Keyframes */
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px #ff00ff; }
+  50% { box-shadow: 0 0 20px #00ffff; }
+}
+
+@keyframes flickerScan {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     opacity: 1;
   }
   20%, 22%, 24%, 55% {
-    opacity: 0.4;
+    opacity: 0.2;
   }
 }
 
-@keyframes shake {
-  0% { transform: translate(1px, 1px); }
-  100% { transform: translate(-1px, -1px); }
+@keyframes driftDrip {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(0px); }
 }
 
-@keyframes bgGradient {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+@keyframes corruptNoise {
+  0%, 100% { background-color: rgba(10, 0, 20, 0.75); }
+  50% { background-color: rgba(30, 10, 40, 0.85); }
 }
 
-.x-button {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  background: #fff;
-  color: black;
-  font-size: 0.8rem;
-  border: 2px solid #0ff;
-  text-decoration: none;
-  box-shadow: 0 0 8px #0ff;
-  transition: all 0.2s ease-in-out;
+/* Strong chaotic glitch for GLITCHED */
+.title {
+  font-size: 2.8rem;
+  color: white;
+  position: relative;
+  animation: intenseGlitch 0.5s infinite;
+  letter-spacing: 0.1em;
 }
 
-.x-button:hover {
-  background: #0ff;
-  color: #000;
-  transform: scale(1.1);
+@keyframes intenseGlitch {
+  0% {
+    transform: translate(0);
+    text-shadow: 2px 0 red, -2px 0 cyan;
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    text-shadow: 2px -1px blue, -2px 1px lime;
+  }
+  20% {
+    transform: translate(3px, -1px);
+    text-shadow: -2px 2px magenta, 2px 1px yellow;
+  }
+  30% {
+    transform: translate(-1px, -3px);
+    text-shadow: 3px 0 green, -1px -2px orange;
+  }
+  40% {
+    transform: translate(2px, 1px);
+    text-shadow: -3px 2px purple, 1px 1px white;
+  }
+  50% {
+    transform: translate(0px);
+    text-shadow: 2px 2px red, -2px -2px cyan;
+  }
+  100% {
+    transform: translate(1px, -1px);
+    text-shadow: -1px 1px red, 1px -1px blue;
+  }
 }
 
-/* #2 - Screen flicker + distortion */
-@keyframes glitchFlicker {
-  0% { opacity: 1; transform: none; }
-  20% { opacity: 0.8; transform: skewX(5deg); }
-  40% { opacity: 0.6; transform: skewX(-5deg); }
-  60% { opacity: 0.4; transform: scale(1.01); }
-  80% { opacity: 0.9; transform: translateX(2px); }
-  100% { opacity: 1; transform: none; }
+/* DANGER TERMINAL SECTION */
+.danger-terminal {
+  background: #110000;
+  color: red;
+  font-family: monospace;
+  padding: 40px;
+  margin: 50px auto;
+  max-width: 90%;
+  border: 2px solid red;
+  box-shadow: 0 0 20px red;
 }
 
-.hero, .lore, .stats, .community {
-  animation: glitchFlicker 5s infinite ease-in-out;
-}
-
-/* #4 - Emulator Frame */
-.lore {
-  border: 4px solid #0ff;
-  box-shadow: inset 0 0 30px #0ff, 0 0 20px #f0f;
-  border-radius: 10px;
-  background-color: #000;
-  margin: 2rem auto;
-  max-width: 80%;
-}
-
-/* #5 - Scroll Glitch Messages */
-.scroll-message {
-  font-size: 0.65rem;
-  color: #0ff;
+.danger-terminal h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  animation: pulseRed 2s infinite;
   text-align: center;
-  margin: 2rem auto;
-  animation: flicker 3s infinite;
+  letter-spacing: 2px;
 }
 
-/* #6 - Typewriter effect for lore */
-.dialogue-box p {
-  display: block;
+.typing-output {
+  white-space: pre-wrap;
   overflow: hidden;
-  animation: typing-multi 4s steps(100, end), blink-caret 0.75s step-end infinite;
-  border-right: 2px solid #0ff;
-  white-space: normal;
-  word-wrap: break-word;
+  border-left: 4px solid red;
+  padding-left: 12px;
+  animation: typeWriter 8s steps(40, end) 1;
 }
 
-/* Multi-line typewriter simulation */
-@keyframes typing-multi {
-  from { max-height: 0; }
-  to { max-height: 500px; }
-}
-
-@keyframes typing {
+/* Typing effect */
+@keyframes typeWriter {
   from { width: 0 }
   to { width: 100% }
 }
 
-@keyframes blink-caret {
-  0%, 100% { border-color: transparent }
-  50% { border-color: #0ff; }
+@keyframes pulseRed {
+  0%, 100% { text-shadow: 0 0 8px red; }
+  50% { text-shadow: 0 0 20px red; }
 }
 
-/* #7 - Fake glitch banner */
-.fake-error {
-  background: red;
-  color: black;
-  padding: 0.5rem;
-  font-size: 0.6rem;
-  text-align: center;
-  font-weight: bold;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-}
-
-.roadmap {
-  padding: 3rem 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  border-top: 2px dashed #f0f;
-  text-align: center;
-}
-
-.roadmap h2 {
-  color: #f0f;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-}
-
-.roadmap ul {
-  list-style: none;
-  padding: 0;
-  font-size: 0.7rem;
-  color: #0ff;
-}
-
-.roadmap li {
-  margin: 0.5rem 0;
-  animation: flicker 2.5s infinite;
-}
-
-.terminal {
-  padding: 2rem;
-  background: #000;
-  color: #0f0;
-  font-family: monospace;
-  font-size: 0.6rem;
-  text-align: left;
-  max-width: 700px;
-  margin: 3rem auto;
-  border: 2px solid #0ff;
-  box-shadow: 0 0 10px #0ff;
-  white-space: pre;
-}
-
-.insult-banner {
-  background: yellow;
-  color: black;
-  font-size: 0.7rem;
-  text-align: center;
-  padding: 0.5rem;
-  border-bottom: 3px dashed red;
-  font-weight: bold;
-  animation: shake 0.3s infinite alternate;
-}
-
-h2 {
-  color: #ff00ff;
-}
-
-.boot-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: black;
-  color: #0f0;
-  font-family: monospace;
-  font-size: 1rem;
+.terminal-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  flex-direction: column;
-  animation: hideBoot 2.8s ease-out 1 forwards;
-  text-align: left;
-  padding: 2rem;
 }
 
-@keyframes hideBoot {
-  0% { opacity: 1; }
-  95% { opacity: 1; }
-  100% { opacity: 0; display: none; visibility: hidden; }
+.typing-output {
+  white-space: pre-wrap;
+  overflow: hidden;
+  border-left: 4px solid red;
+  padding-left: 12px;
+  animation: typeWriter 12s steps(60, end) 1;
+  max-width: 80%;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 auto;
 }
 
-.boot-line {
-  opacity: 0;
-  animation: showLine 0.5s ease-out forwards;
-}
-
-.boot-line:nth-child(1) { animation-delay: 0.2s; }
-.boot-line:nth-child(2) { animation-delay: 0.8s; }
-.boot-line:nth-child(3) { animation-delay: 1.4s; }
-.boot-line:nth-child(4) { animation-delay: 2s; }
-
-@keyframes showLine {
-  to { opacity: 1; }
-}
-
-.transmission, .warnings, .scrap-gallery, .game-settings {
-  padding: 3rem 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  border-top: 2px dashed #ff00ff;
-  text-align: center;
-}
-
-.transmission ul, .warnings ul, .game-settings ul {
-  list-style: none;
-  padding: 0;
-  font-size: 0.75rem;
-  color: #0ff;
-  margin-top: 1rem;
-}
-
-.scrap-gallery .scraps {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #f0f;
-  font-size: 0.75rem;
-}
-
-.scrap-gallery .sprite {
-  font-size: 2rem;
-  margin: 0.5rem 0;
-}
-
-.scrap-gallery .caption {
-  margin-bottom: 1.5rem;
+/* Glowing Margin Container */
+.glow-container {
+  margin: 0 auto;
+  padding: 40px 8vw;
+  border: 3px solid rgba(255, 0, 255, 0.4);
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
+  background-color: black;
+  max-width: 1200px;
+  border-radius: 12px;
 }
