@@ -394,7 +394,7 @@ section {
 }
 .x-button {
   display: inline-block;
-  margin: 4rem auto;
+  margin: 1rem auto;
   text-align: center;
   color: #fff;
   transition: transform 0.2s ease-in-out;
