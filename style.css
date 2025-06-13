@@ -396,7 +396,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
+  margin: 0.7rem auto;
   width: fit-content;
   color: #fff;
   transition: transform 0.2s ease-in-out;
