@@ -393,9 +393,11 @@ section {
   border-radius: 12px;
 }
 .x-button {
-  display: inline-block;
-  margin: 1rem auto;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  width: fit-content;
   color: #fff;
   transition: transform 0.2s ease-in-out;
 }
